@@ -1,15 +1,17 @@
 pipeline {
     agent any
 
-    parameters {
-        string(name: 'ENV', defaultValue: 'dev', description: 'Deployment Environment')
+    environment {
+        APP_NAME = "payment-app"
+        VERSION = "1.0"
     }
 
     stages {
 
-        stage('Print Environment') {
+        stage('Display Variables') {
             steps {
-                echo "Deploying to ${params.ENV}"
+                echo "Application: ${APP_NAME}"
+                echo "Version: ${VERSION}"
             }
         }
     }
