@@ -6,5 +6,10 @@ pipeline{
         echo "Demo of pipline from Poll SCM"
       }
     }
+  stage('testdemo') {
+      steps {
+        echo "Demo of pipline test from Poll SCM bhutan"
+      }
+    }
   }
 }
