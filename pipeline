@@ -1,0 +1,10 @@
+pipeline{
+  agent any
+  stages {
+    stage('hello') {
+      steps {
+        echo "Demo of pipline from Poll SCM"
+      }
+    }
+  }
+}
