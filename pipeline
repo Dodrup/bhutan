@@ -1,81 +1,26 @@
 pipeline {
-    agent any
-
-    parameters {
-        choice(name: 'ACTION', choices: ['build', 'deploy'], description: 'Choose action')
-    }
-
+    agent any  // This agent will apply to the entire pipeline (default for all stages)
+    
     stages {
-
+        // Stage with pipeline-level agent
         stage('Build') {
-            when {
-                expression {
-                    params.ACTION == 'build'
-                }
-            }
-
             steps {
-                echo 'Building application...'
+                echo 'This is the Build stage, using the pipeline agent (any available agent).'
             }
         }
 
-        stage('Deploy') {
-            when {
-                expression {
-                    params.ACTION == 'deploy'
-                }
-            }
-
-            steps {
-                echo 'Deploying application...'
-            }
-        }
-    }
-}
-
-
-pipeline {
-    agent any
-
-    parameters {
-        choice(name: 'ACTION', choices: ['build', 'test', 'deploy'], description: 'Choose action')
-    }
-
-    stages {
-
-        stage('Build') {
-            when {
-                expression {
-                    params.ACTION == 'build'
-                }
-            }
-
-            steps {
-                echo 'Building application...'
-            }
-        }
-
+        // Stage with a specific agent defined at the stage level
         stage('Test') {
-            when {
-                expression {
-                    params.ACTION == 'test'
-                }
-            }
-
+            agent { label 'linux' }  // Overrides the pipeline-level agent and specifies a 'linux' agent
             steps {
-                echo 'Running tests...'
+                echo 'This is the Test stage, using a specific agent labeled "linux".'
             }
         }
 
+        // Stage with pipeline-level agent again
         stage('Deploy') {
-            when {
-                expression {
-                    params.ACTION == 'deploy'
-                }
-            }
-
             steps {
-                echo 'Deploying application...'
+                echo 'This is the Deploy stage, using the pipeline agent (any available agent).'
             }
         }
     }
