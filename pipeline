@@ -11,9 +11,9 @@ pipeline {
 
         // Stage with a specific agent defined at the stage level
         stage('Test') {
-            agent { label 'linux' }  // Overrides the pipeline-level agent and specifies a 'linux' agent
+            agent any  // Use any available agent for this stage (no need for a label like 'linux')
             steps {
-                echo 'This is the Test stage, using a specific agent labeled "linux".'
+                echo 'This is the Test stage, using a specific agent (any available agent).'
             }
         }
 
